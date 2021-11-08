@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './countButton.css'
 
 const CountButton = props => {
@@ -21,10 +21,23 @@ const CountButton = props => {
     borderRadius: '10px'
   }
 
+  useEffect(() => {
+    if (currentCount === 10) {
+      alert('the count is 10')
+    }
+  }, [currentCount])
+
   return (
     <div style={divStyle}>
-      <button style={buttonStyle}onClick={() => {handleClick()}}>+{props.incrementBy}</button>
-      <div className="count-Display">{currentCount}</div>
+      <button
+        style={buttonStyle}
+        onClick={() => {
+          handleClick()
+        }}
+      >
+        +{props.incrementBy}
+      </button>
+      <div className='count-Display'>{currentCount}</div>
     </div>
   )
 }
