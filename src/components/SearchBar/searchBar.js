@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './searchBar.css'
 
-const SearchBar = () => {
+const SearchBar = props => {
   const [searchValue, setSearchValue] = useState('')
   const handleInputChange = event => {
     setSearchValue(event.target.value)
@@ -11,13 +11,24 @@ const SearchBar = () => {
   }
 
   const shouldDisplayButton = searchValue.length > 0
-//   console.log(shouldDisplayButton)
 
-//   let showButton = () => {
-//     if (shouldDisplayButton === true) {
-//       return <button onClick={handleClearClick}>Clear</button>
-//     }
-//   }
+  //   console.log(
+  //     products.map(product => {
+  //       return product.toUpperCase()
+  //     })
+  //   )
+
+  const filteredProducts = props.products.filter((product) => {
+    return product.includes(searchValue)
+  })
+
+  //   console.log(shouldDisplayButton)
+
+  //   let showButton = () => {
+  //     if (shouldDisplayButton === true) {
+  //       return <button onClick={handleClearClick}>Clear</button>
+  //     }
+  //   }
 
   return (
     <div>
@@ -27,6 +38,11 @@ const SearchBar = () => {
         onChange={handleInputChange}
       ></input>
       {shouldDisplayButton && <button onClick={handleClearClick}>Clear</button>}
+      <ul>
+        {filteredProducts.map(product => {
+          return <li key={product}>{product}</li>
+        })}
+      </ul>
     </div>
   )
 }
